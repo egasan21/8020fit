@@ -47,10 +47,6 @@ const userSchema = new mongoose.Schema({
     completed: { type: Boolean, default: false },
     completedAt: Date,
     fitnessProfile: {
-      goals: [{
-        type: String,
-        enum: ['weight_loss', 'muscle_gain', 'endurance', 'flexibility', 'general_fitness']
-      }],
       currentMetrics: {
         height: Number,  // in cm
         weight: Number,  // in kg
@@ -58,6 +54,26 @@ const userSchema = new mongoose.Schema({
         gender: {
           type: String,
           enum: ['male', 'female', 'other', 'prefer_not_to_say']
+        },
+        hypertension: {
+          type: Boolean,
+          default: false
+        },
+        diabetes: {
+          type: Boolean,
+          default: false
+        },
+        bodyType: {
+          type: String,
+          enum: ['underweight', 'normal', 'overweight', 'obuse']
+        },
+        fitnessGoalType: {
+          type: String,
+          enum: ['weight_gain', 'weight_loss']
+        },
+        fitnessType: {
+          type: String,
+          enum: ['muscular_fitness', 'cardio_fitness']
         },
         activityLevel: {
           type: String,

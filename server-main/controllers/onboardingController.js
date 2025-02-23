@@ -3,15 +3,59 @@ const User = require('../models/User');
 const submitOnboardingQuiz = async (req, res) => {
   try {
     const {
-      goals,
       currentMetrics,
       preferences
     } = req.body;
 
     // Validate required fields
-    if (!goals || !currentMetrics || !preferences) {
+    if (!currentMetrics || !preferences) {
       return res.status(400).send({
         error: 'Missing required onboarding information'
+      });
+    }
+
+    // Validate specific current metrics fields
+    const requiredMetrics = [
+      'height',
+      'weight',
+      'age',
+      'gender',
+      'hypertension',
+      'diabetes',
+      'bodyType',
+      'fitnessGoalType',
+      'fitnessType'
+    ];
+
+    const missingMetrics = requiredMetrics.filter(field => 
+      !currentMetrics.hasOwnProperty(field));
+
+    if (missingMetrics.length > 0) {
+      return res.status(400).send({
+        error: `Missing required metrics: ${missingMetrics.join(', ')}`
+      });
+    }
+
+    // Validate enum values
+    const validBodyTypes = ['underweight', 'normal', 'overweight', 'obese'];
+    const validFitnessGoalTypes = ['weight_gain', 'weight_loss'];
+    const validFitnessTypes = ['muscular_fitness', 'cardio_fitness'];
+
+    if (!validBodyTypes.includes(currentMetrics.bodyType)) {
+      return res.status(400).send({
+        error: 'Invalid body type'
+      });
+    }
+
+    if (!validFitnessGoalTypes.includes(currentMetrics.fitnessGoalType)) {
+      return res.status(400).send({
+        error: 'Invalid fitness goal type'
+      });
+    }
+
+    if (!validFitnessTypes.includes(currentMetrics.fitnessType)) {
+      return res.status(400).send({
+        error: 'Invalid fitness type'
       });
     }
 
@@ -20,7 +64,6 @@ const submitOnboardingQuiz = async (req, res) => {
       completed: true,
       completedAt: new Date(),
       fitnessProfile: {
-        goals,
         currentMetrics,
         preferences
       }
