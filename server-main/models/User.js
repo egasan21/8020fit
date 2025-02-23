@@ -24,11 +24,11 @@ const userSchema = new mongoose.Schema({
     default: 'user'
   },
   profile: {
-    firstName: String,
-    lastName: String,
-    company: String,
-    position: String,
-    phone: String
+    firstName: { type: String, default: '' },
+    lastName: { type: String, default: '' },
+    company: { type: String, default: '' },
+    position: { type: String, default: '' },
+    phone: { type: String, default: '' }
   },
   avatar: String,
   settings: {

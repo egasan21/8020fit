@@ -9,6 +9,7 @@ const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
 const onboardingRoutes = require('./routes/onboarding');
 const workoutRoutes = require('./routes/workout');
+const Workout = require('./models/Workout');
 
 dotenv.config();
 
@@ -17,7 +18,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.get('/',(req,res) => {
-  res.json("Welcome to MarketPulse API!!")
+  res.json("Welcome to 8020Fit API!!")
 });
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
@@ -84,13 +85,13 @@ const start = async () => {
           }
         }
       },
-      // { resource: Campaign, options: { parent: { name: 'Campaign Management' }}},
+      { resource: Workout, options: { parent: { name: 'Workout Management' }}},
       // { resource: Client, options: { parent: { name: 'Client Management' }}},
       // { resource: Analytics, options: { parent: { name: 'Analytics Management' }}}
     ],
     rootPath: '/admin',
     branding: {
-      companyName: 'MarketPulse Admin',
+      companyName: '8020Fit Admin',
       logo: false,
       softwareBrothers: false
     }

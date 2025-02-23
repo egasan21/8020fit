@@ -11,6 +11,8 @@ node_modules
 dist
 dist-ssr
 *.local
+8020fit
+8020fitfrontend
 
 # Editor directories and files
 .vscode/*
