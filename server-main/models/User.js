@@ -1,6 +1,52 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
+// Define the exercise schema for workouts
+const exerciseSchema = new mongoose.Schema({
+  exerciseId: {
+    type: Number,
+    required: true
+  },
+  name: {
+    type: String,
+    required: true
+  },
+  sets: {
+    type: Number,
+    required: true,
+    min: 1
+  },
+  reps: {
+    type: Number,
+    required: true,
+    min: 1
+  },
+  weight: {
+    type: Number,
+    default: 0
+  }
+}, { _id: false });
+
+// Define the workout schema
+const workoutSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  description: {
+    type: String,
+    default: ''
+  },
+  exercises: [exerciseSchema],
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
+  updatedAt: {
+    type: Date
+  }
+});
+
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
@@ -109,7 +155,30 @@ const userSchema = new mongoose.Schema({
         }]
       }
     }
-  }
+  },
+  // Add workouts array to support WGER integration
+  workouts: [workoutSchema],
+  // Add favorites to allow users to bookmark exercises
+  favoriteExercises: [{
+    exerciseId: Number,
+    name: String,
+    category: String,
+    addedAt: {
+      type: Date,
+      default: Date.now
+    }
+  }],
+  // Add workout history to track completed workouts
+  workoutHistory: [{
+    workoutId: mongoose.Schema.Types.ObjectId,
+    workoutName: String,
+    completedAt: {
+      type: Date,
+      default: Date.now
+    },
+    duration: Number, // in minutes
+    notes: String
+  }]
 });
 
 // Password hashing middleware

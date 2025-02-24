@@ -10,6 +10,7 @@ const mongoose = require('mongoose');
 const onboardingRoutes = require('./routes/onboarding');
 const workoutRoutes = require('./routes/workout');
 const Workout = require('./models/Workout');
+const wgerRoutes = require('./routes/wger');
 
 dotenv.config();
 
@@ -24,6 +25,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/onboarding', onboardingRoutes);
 app.use('/api/workouts', workoutRoutes);
+app.use('/api/wger', wgerRoutes);
 
 const DEFAULT_ADMIN = {
   email: process.env.ADMIN_EMAIL || 'admin@example.com',
