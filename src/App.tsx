@@ -1,52 +1,46 @@
-import { useEffect, useState } from "react";
-import { useAuthenticator } from '@aws-amplify/ui-react';
-import type { Schema } from "../amplify/data/resource";
-import { generateClient } from "aws-amplify/data";
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { useAuthenticator, Authenticator } from '@aws-amplify/ui-react';
+import '@aws-amplify/ui-react/styles.css';
+import NavigationBar from './components/NavigationBar';
+import Home from './pages/Home';
+import OnboardingQuiz from './pages/OnboardingQuiz';
+import FitnessDashboard from './pages/FitnessDashboard';
+import Settings from './pages/Settings';
 
-const client = generateClient<Schema>();
+const App: React.FC = () => {
+  return (
+    <Authenticator>
+      <Router>
+        <NavigationBar />
+        <ProtectedRoutes />
+      </Router>
+    </Authenticator>
+  );
+};
 
-function App() {
+// ✅ This function ensures users are signed in before accessing pages
+const ProtectedRoutes: React.FC = () => {
   const { user, signOut } = useAuthenticator();
-  const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
-  
 
-  useEffect(() => {
-    client.models.Todo.observeQuery().subscribe({
-      next: (data) => setTodos([...data.items]),
-    });
-  }, []);
-
-  
-  function deleteTodo(id: string) {
-    client.models.Todo.delete({ id })
-  }
-
-  function createTodo() {
-    client.models.Todo.create({ content: window.prompt("Todo content") });
+  if (!user) {
+    return <Navigate to="/" replace />;
   }
 
   return (
-    <main>
-      <button onClick={signOut}>Sign out</button>
-      <h1>{user?.signInDetails?.loginId}'s todos</h1>
-      <button onClick={createTodo}>+ new</button>
-      <ul>
-        {todos.map((todo) => (
-          <li 
-          onClick={() => deleteTodo(todo.id)}
-          key={todo.id}>{todo.content}</li>
-        ))}
-      </ul>
-      <div>
-        🥳 Starting template for a Fitness webapp.
-        <br />
-        <a href="https://github.com/htmw/2025SA-Team2">
-          Please visit our GitHub page. Thank you.
-        </a>
+    <>
+      <div style={{ textAlign: "center", padding: "20px" }}>
+        <h3>Welcome, {user?.signInDetails?.loginId}!</h3>
+        <button onClick={signOut}>Sign Out</button>
       </div>
-    </main>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/onboarding-quiz" element={<OnboardingQuiz />} />
+        <Route path="/fitness-dashboard" element={<FitnessDashboard />} />
+        <Route path="/settings" element={<Settings />} />
+      </Routes>
+    </>
   );
-}
+};
 
 export default App;
-/*test commit for aws amplify*/ 
