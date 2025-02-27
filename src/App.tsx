@@ -1,50 +1,39 @@
-import { useEffect, useState } from "react";
+import React from 'react';
 import type { Schema } from "../amplify/data/resource";
-import { useAuthenticator } from '@aws-amplify/ui-react';
+import { withAuthenticator, useAuthenticator } from '@aws-amplify/ui-react';
 import { generateClient } from "aws-amplify/data";
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import Onboarding from './Onboarding';
 
 const client = generateClient<Schema>();
 
 function App() {
   const { user, signOut } = useAuthenticator();
-  const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
-
-  useEffect(() => {
-    client.models.Todo.observeQuery().subscribe({
-      next: (data) => setTodos([...data.items]),
-    });
-  }, []);
-
-  function createTodo() {
-    client.models.Todo.create({ content: window.prompt("Todo content") });
-  }
-
-  function deleteTodo(id: string) {
-    client.models.Todo.delete({ id })
-  }
 
   return (
-    <main>
-      <h1>{user?.signInDetails?.loginId}'s todos</h1>
-      <h1>My todos</h1>
-      <button onClick={createTodo}>+ new</button>
-      <ul>
-        {todos.map((todo) => (
-          <li
-          onClick={() => deleteTodo(todo.id)}
-          key={todo.id}>{todo.content}</li>
-        ))}
-      </ul>
-      <div>
-        🥳 App successfully hosted. Try creating a new todo.
-        <br />
-        <a href="https://docs.amplify.aws/react/start/quickstart/#make-frontend-updates">
-          Review next step of this tutorial.
-        </a>
-      </div>
-      <button onClick={signOut}>Sign out</button>
-    </main>
+<Router>
+      <Routes>
+        {/* Default route ("/"): shows a button to go to Onboarding */}
+        <Route
+          path="/"
+          element={
+            <div style={{ padding: '1rem' }}>
+              <h2>Welcome </h2>
+              <Link to="/onboarding">
+                <button>Start Onboarding Quiz</button>
+              </Link>
+
+              <br /><br />
+              <button onClick={signOut}>Sign Out</button>
+            </div>
+          }
+        />
+
+        {/* Route for our Onboarding Quiz page */}
+        <Route path="/onboarding" element={<Onboarding />} />
+      </Routes>
+    </Router>
   );
 }
 
-export default App;
+export default withAuthenticator(App);
