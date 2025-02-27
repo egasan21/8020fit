@@ -5,8 +5,19 @@
   text-align: center;
 }
 
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 20px; /* Adjust this value to move it up/down */
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .logo {
-  height: 6em;
+  width: 150px;
+  height: auto;
   padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;

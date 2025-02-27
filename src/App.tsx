@@ -1,3 +1,5 @@
+import React from 'react'
+import Navbar from './components/Navbar'
 import { useEffect, useState } from "react";
 import { useAuthenticator } from '@aws-amplify/ui-react';
 import type { Schema } from "../amplify/data/resource";
@@ -7,48 +9,19 @@ const client = generateClient<Schema>();
 
 function App() {
   const { user, signOut } = useAuthenticator();
-  const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
-  
 
-  useEffect(() => {
-    client.models.Todo.observeQuery().subscribe({
-      next: (data) => setTodos([...data.items]),
-    });
-  }, []);
-
-  
-  function deleteTodo(id: string) {
-    client.models.Todo.delete({ id })
-  }
-
-  function createTodo() {
-    client.models.Todo.create({ content: window.prompt("Todo content") });
-  }
 
   return (
     <main>
+      <div className="logo-container">
+        <img src="src\assets\favicon.ico" alt = "Logo" className="logo"></img>
+      </div>
+
       <h1>Welcome to {user?.signInDetails?.loginId}'s Home Page!</h1>
-      <button onClick={createTodo}>+ new</button>
-
-      <ul>
-        {todos.map((todo) => (
-          <li 
-          onClick={() => deleteTodo(todo.id)}
-          key={todo.id}>{todo.content}</li>
-        ))}
-      </ul>
-
-      <button> AI Chat Bot</button>
-
-      <button> Workout </button>
-
-      <button> Quiz </button>
-
-      <button> Settings </button>
-
-      <button onClick={signOut}>Sign out</button>
-      <br />
-
+    
+      <div>
+        <Navbar />
+      </div>
 
       <div>
         🥳 Starting template for a Fitness webapp.
@@ -57,6 +30,7 @@ function App() {
           Please visit our GitHub page. Thank you.
         </a>
       </div>
+      <button onClick={signOut}>Sign out</button>
       
     </main>
   );
