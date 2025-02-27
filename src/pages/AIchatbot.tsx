@@ -3,7 +3,7 @@ import React from 'react'
 const AIchatbot = () => {
     return(
         <div>
-            <h1>Home Page</h1>
+            <h1>AI Page</h1>
 
         </div>
     )

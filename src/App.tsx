@@ -4,6 +4,12 @@ import { useEffect, useState } from "react";
 import { useAuthenticator } from '@aws-amplify/ui-react';
 import type { Schema } from "../amplify/data/resource";
 import { generateClient } from "aws-amplify/data";
+import { Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Settings from './pages/Settings';
+import Quiz from './pages/Quiz';
+import Workout from './pages/Workout';
+import AIchatbot from './pages/AIchatbot';
 
 const client = generateClient<Schema>();
 
@@ -13,18 +19,24 @@ function App() {
 
   return (
     <main>
-      <div className="logo-container">
-        <img src="src\assets\favicon.ico" alt = "Logo" className="logo"></img>
-      </div>
-
-      <h1>Welcome to {user?.signInDetails?.loginId}'s Home Page!</h1>
-    
+     
       <div>
         <Navbar />
+        <div className='container'>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/settings' element={<Settings />} />
+            <Route path='/Quiz' element={<Quiz />} />
+            <Route path='/Workout' element={<Workout />} />
+            <Route path='/AIchatbot' element={<AIchatbot />} />
+          </Routes>
+        </div>
       </div>
 
+      
+
       <div>
-        🥳 Starting template for a Fitness webapp.
+        🥳 Starting template for a Fitness webapp!
         <br />
         <a href="https://github.com/htmw/2025SA-Team2">
           Please visit our GitHub page. Thank you.
