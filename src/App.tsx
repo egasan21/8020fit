@@ -27,9 +27,9 @@ function App() {
 
   return (
     <main>
-      <button onClick={signOut}>Sign out</button>
-      <h1>{user?.signInDetails?.loginId}'s todos</h1>
+      <h1>Welcome to {user?.signInDetails?.loginId}'s Home Page!</h1>
       <button onClick={createTodo}>+ new</button>
+
       <ul>
         {todos.map((todo) => (
           <li 
@@ -37,6 +37,19 @@ function App() {
           key={todo.id}>{todo.content}</li>
         ))}
       </ul>
+
+      <button> AI Chat Bot</button>
+
+      <button> Workout </button>
+
+      <button> Quiz </button>
+
+      <button> Settings </button>
+
+      <button onClick={signOut}>Sign out</button>
+      <br />
+
+
       <div>
         🥳 Starting template for a Fitness webapp.
         <br />
@@ -44,6 +57,7 @@ function App() {
           Please visit our GitHub page. Thank you.
         </a>
       </div>
+      
     </main>
   );
 }
