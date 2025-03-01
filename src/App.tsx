@@ -1,14 +1,14 @@
 import React from 'react';
 import type { Schema } from "../amplify/data/resource";
-import Navbar from '../components/Navbar'
+import Navbar from './components/Navbar'
 import { withAuthenticator, useAuthenticator } from '@aws-amplify/ui-react';
 import { generateClient } from "aws-amplify/data";
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import Home from '../pages/Home';
-import Settings from '../pages/Settings';
-import Quiz from '../pages/Quiz';
-import Workout from '../pages/Workout';
-import AIchatbot from '../pages/AIchatbot';
+import Home from './pages/Home';
+import Settings from './pages/Settings';
+import Quiz from './pages/Quiz';
+import Workout from './pages/Workout';
+import AIchatbot from './pages/AIchatbot';
 
 const client = generateClient<Schema>();
 
