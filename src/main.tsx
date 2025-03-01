@@ -6,14 +6,15 @@ import "./index.css";
 import { Amplify } from "aws-amplify";
 import outputs from "../amplify_outputs.json";
 import '@aws-amplify/ui-react/styles.css';
+import { BrowserRouter } from 'react-router-dom'
 
 Amplify.configure(outputs);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   
-  <React.StrictMode>
+  <BrowserRouter>
     <Authenticator>
       <App />
     </Authenticator>
-  </React.StrictMode>
+  </BrowserRouter>
 );
