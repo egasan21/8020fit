@@ -1,38 +1,49 @@
 import React from 'react';
 import type { Schema } from "../amplify/data/resource";
+import Navbar from '../components/Navbar'
 import { withAuthenticator, useAuthenticator } from '@aws-amplify/ui-react';
 import { generateClient } from "aws-amplify/data";
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import Onboarding from './Onboarding';
+import Home from '../pages/Home';
+import Settings from '../pages/Settings';
+import Quiz from '../pages/Quiz';
+import Workout from '../pages/Workout';
+import AIchatbot from '../pages/AIchatbot';
 
 const client = generateClient<Schema>();
 
 function App() {
   const { user, signOut } = useAuthenticator();
 
+
   return (
-<Router>
-      <Routes>
-        {/* Default route ("/"): shows a button to go to Onboarding */}
-        <Route
-          path="/"
-          element={
-            <div style={{ padding: '1rem' }}>
-              <h2>Welcome </h2>
-              <Link to="/onboarding">
-                <button>Start Onboarding Quiz</button>
-              </Link>
+    <main>
+     
+      <div>
+        <Navbar />
+        <div className='container'>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/settings' element={<Settings />} />
+            <Route path='/Quiz' element={<Quiz />} />
+            <Route path='/Workout' element={<Workout />} />
+            <Route path='/AIchatbot' element={<AIchatbot />} />
+          </Routes>
+        </div>
+      </div>
 
-              <br /><br />
-              <button onClick={signOut}>Sign Out</button>
-            </div>
-          }
-        />
+      
 
-        {/* Route for our Onboarding Quiz page */}
-        <Route path="/onboarding" element={<Onboarding />} />
-      </Routes>
-    </Router>
+      <div>
+        🥳 Starting template for a Fitness webapp!
+        <br />
+        <a href="https://github.com/htmw/2025SA-Team2">
+          Please visit our GitHub page. Thank you.
+        </a>
+      </div>
+      <button onClick={signOut}>Sign out</button>
+      
+    </main>
   );
 }
 

@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 const client = generateClient<Schema>();
 
-function Onboarding(): JSX.Element {
+function Quiz(): JSX.Element {
   const navigate = useNavigate();
 
   const [age, setAge] = useState<string>('');
@@ -101,4 +101,4 @@ function Onboarding(): JSX.Element {
   );
 }
 
-export default Onboarding;
+export default Quiz;
