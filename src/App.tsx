@@ -1,10 +1,9 @@
-import React from 'react'
-import Navbar from './components/Navbar'
-import { useEffect, useState } from "react";
-import { useAuthenticator } from '@aws-amplify/ui-react';
+import React from 'react';
 import type { Schema } from "../amplify/data/resource";
+import Navbar from './components/Navbar'
+import { withAuthenticator, useAuthenticator } from '@aws-amplify/ui-react';
 import { generateClient } from "aws-amplify/data";
-import { Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from './pages/Home';
 import Settings from './pages/Settings';
 import Quiz from './pages/Quiz';
@@ -48,5 +47,4 @@ function App() {
   );
 }
 
-export default App;
-/*test commit for aws amplify*/ 
+export default withAuthenticator(App);
