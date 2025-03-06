@@ -1,12 +1,15 @@
-import React from 'react';
+import React from 'react'
+import { useAuthenticator } from '@aws-amplify/ui-react';
 
-const Home: React.FC = () => {
-  return (
-    <div>
-      <h1>Welcome to 8020Fit</h1>
-      <p>Your personalized fitness journey starts here.</p>
-    </div>
-  );
-};
 
-export default Home;
+const Home = () => {
+    const { user} = useAuthenticator();
+    return(
+        <div>
+            <h1>Welcome to {user?.signInDetails?.loginId}'s Home Page!</h1>
+
+        </div>
+    )
+}
+
+export default Home

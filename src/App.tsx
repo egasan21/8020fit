@@ -1,12 +1,15 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { useAuthenticator, Authenticator } from '@aws-amplify/ui-react';
-import '@aws-amplify/ui-react/styles.css';
-import NavigationBar from './components/NavigationBar';
+import React from 'react'
+import Navbar from './components/Navbar'
+import { useEffect, useState } from "react";
+import { useAuthenticator } from '@aws-amplify/ui-react';
+import type { Schema } from "../amplify/data/resource";
+import { generateClient } from "aws-amplify/data";
+import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
-import OnboardingQuiz from './pages/OnboardingQuiz';
-import FitnessDashboard from './pages/FitnessDashboard';
 import Settings from './pages/Settings';
+import Quiz from './pages/Quiz';
+import Workout from './pages/Workout';
+import AIchatbot from './pages/AIchatbot';
 
 const App: React.FC = () => {
   return (
@@ -23,23 +26,35 @@ const App: React.FC = () => {
 const ProtectedRoutes: React.FC = () => {
   const { user, signOut } = useAuthenticator();
 
-  if (!user) {
-    return <Navigate to="/" replace />;
-  }
 
   return (
-    <>
-      <div style={{ textAlign: "center", padding: "20px" }}>
-        <h3>Welcome, {user?.signInDetails?.loginId}!</h3>
-        <button onClick={signOut}>Sign Out</button>
+    <main>
+     
+      <div>
+        <Navbar />
+        <div className='container'>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/settings' element={<Settings />} />
+            <Route path='/Quiz' element={<Quiz />} />
+            <Route path='/Workout' element={<Workout />} />
+            <Route path='/AIchatbot' element={<AIchatbot />} />
+          </Routes>
+        </div>
       </div>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/onboarding-quiz" element={<OnboardingQuiz />} />
-        <Route path="/fitness-dashboard" element={<FitnessDashboard />} />
-        <Route path="/settings" element={<Settings />} />
-      </Routes>
-    </>
+
+      
+
+      <div>
+        🥳 Starting template for a Fitness webapp!
+        <br />
+        <a href="https://github.com/htmw/2025SA-Team2">
+          Please visit our GitHub page. Thank you.
+        </a>
+      </div>
+      <button onClick={signOut}>Sign out</button>
+      
+    </main>
   );
 };
 
