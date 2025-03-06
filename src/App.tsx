@@ -1,16 +1,16 @@
-import React from 'react'
-import Navbar from './components/Navbar'
-import { useEffect, useState } from "react";
-import { useAuthenticator } from '@aws-amplify/ui-react';
+import React from 'react';
 import type { Schema } from "../amplify/data/resource";
+import Navbar from './components/Navbar'
+import { withAuthenticator, useAuthenticator } from '@aws-amplify/ui-react';
 import { generateClient } from "aws-amplify/data";
-import { Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from './pages/Home';
 import Settings from './pages/Settings';
 import Quiz from './pages/Quiz';
 import Workout from './pages/Workout';
 import AIchatbot from './pages/AIchatbot';
 
+<<<<<<< HEAD
 const App: React.FC = () => {
   return (
     <Authenticator>
@@ -20,20 +20,9 @@ const App: React.FC = () => {
       </Router>
     </Authenticator>
   );
-};
-
-// ✅ This function ensures users are signed in before accessing pages
-const ProtectedRoutes: React.FC = () => {
-  const { user, signOut } = useAuthenticator();
-
-
-  return (
-    <main>
-     
       <div>
         <Navbar />
         <div className='container'>
-          <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/settings' element={<Settings />} />
             <Route path='/Quiz' element={<Quiz />} />
@@ -56,6 +45,12 @@ const ProtectedRoutes: React.FC = () => {
       
     </main>
   );
+<<<<<<< HEAD
 };
 
 export default App;
+=======
+}
+
+export default withAuthenticator(App);
+>>>>>>> b0187cd3853238963105e94191dcb35c9653b715

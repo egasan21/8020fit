@@ -7,10 +7,17 @@ specifies that any user authenticated via an API key can "create", "read",
 "update", and "delete" any "Todo" records.
 =========================================================================*/
 const schema = a.schema({
-  Todo: a
+  OnboardingData: a
     .model({
-      content: a.string(),
-    }).authorization(allow => [allow.owner()]),
+      userID: a.string().required(),  // e.g. store the user's Cognito sub
+      age: a.integer(),
+      height: a.string(),
+      weight: a.string(),
+      goals: a.string(),
+      workoutPreference: a.string(),
+    })
+    // Also restrict creation/read/updates to the owner:
+    .authorization(allow => [allow.owner()]),
 });
 
 export type Schema = ClientSchema<typeof schema>;
