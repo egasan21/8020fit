@@ -1,13 +1,12 @@
-import React from 'react';
+import React from 'react'
 
-const AIChatbot: React.FC = () => {
-  return (
-    <div>
-      <h1>AI Chatbot</h1>
-      <p>Chat with our AI assistant for guidance.</p>
-      {/* Chatbot interface will go here */}
-    </div>
-  );
-};
+const AIchatbot = () => {
+    return(
+        <div>
+            <h1>AI Page</h1>
 
-export default AIChatbot;
+        </div>
+    )
+}
+
+export default AIchatbot
