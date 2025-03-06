@@ -10,19 +10,19 @@ import Quiz from './pages/Quiz';
 import Workout from './pages/Workout';
 import AIchatbot from './pages/AIchatbot';
 
-<<<<<<< HEAD
-const App: React.FC = () => {
+const client = generateClient<Schema>();
+
+function App() {
+  const { user, signOut } = useAuthenticator();
+
+
   return (
-    <Authenticator>
-      <Router>
-        <NavigationBar />
-        <ProtectedRoutes />
-      </Router>
-    </Authenticator>
-  );
+    <main>
+     
       <div>
         <Navbar />
         <div className='container'>
+          <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/settings' element={<Settings />} />
             <Route path='/Quiz' element={<Quiz />} />
@@ -45,12 +45,6 @@ const App: React.FC = () => {
       
     </main>
   );
-<<<<<<< HEAD
-};
-
-export default App;
-=======
 }
 
 export default withAuthenticator(App);
->>>>>>> b0187cd3853238963105e94191dcb35c9653b715
