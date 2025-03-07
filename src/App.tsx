@@ -35,7 +35,7 @@ function App() {
       
 
       <div>
-        🥳 Starting template for a Fitness webapp!
+        🥳 Enjoy Being Healthy
         <br />
         <a href="https://github.com/htmw/2025SA-Team2">
           Please visit our GitHub page. Thank you.
