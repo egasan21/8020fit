@@ -34,14 +34,28 @@ function App() {
 
       
 
-      <div>
-        🥳 Enjoy Being Healthy
-        <br />
-        <a href="https://github.com/htmw/2025SA-Team2">
-          Please visit our GitHub page. Thank you.
-        </a>
-      </div>
-      <button onClick={signOut}>Sign out</button>
+      <button
+        onClick={() => signOut()}
+        style={{
+          position: "fixed",
+          bottom: "20px",
+          right: "20px",
+          backgroundColor: "black",
+          color: "white",
+          border: "none",
+          padding: "12px 24px",
+          fontSize: "16px",
+          fontWeight: "bold",
+          borderRadius: "25px",
+          cursor: "pointer",
+          transition: "background-color 0.3s ease",
+          zIndex: 1000,
+        }}
+      >
+        Sign Out
+      </button>
+
+
       
     </main>
   );
