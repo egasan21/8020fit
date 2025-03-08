@@ -11,6 +11,7 @@ const Navbar = () => {
                 <Link to='/AIchatbot'><li>AI Chatbot</li></Link>
                 <Link to='/Workout'><li>Workout</li></Link>
                 <Link to='/Quiz'><li>Quiz</li></Link>
+                <Link to='/Tracker'><li>Tracker</li></Link>
                 <Link to='/Settings'><li>Settings</li></Link>
             </ul>
             <button>Get Started</button>

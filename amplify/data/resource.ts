@@ -21,6 +21,16 @@ const schema = a.schema({
     preferredWorkoutTime: a.string(),
     equipmentAvailable: a.string(),
   }).authorization(allow => [allow.owner()]),
+
+  Tracker: a.model({
+    type: a.string(), // "cardio" or "strength"
+    workout: a.string().required(), // e.g., "Running", "Bench Press"
+    duration: a.integer(), // Only for cardio
+    sets: a.integer(), // Only for strength
+    reps: a.integer(), // Only for strength
+    calories: a.integer().required(),
+    })
+    .authorization(allow => [allow.owner()]), // Restrict access to the owner
   
 });
 
