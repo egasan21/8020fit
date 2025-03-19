@@ -7,10 +7,31 @@ specifies that any user authenticated via an API key can "create", "read",
 "update", and "delete" any "Todo" records.
 =========================================================================*/
 const schema = a.schema({
-  Todo: a
-    .model({
-      content: a.string(),
-    }).authorization(allow => [allow.owner()]),
+  OnboardingData: a.model({
+    userID: a.string().required(),
+    age: a.integer(),
+    heightFeet: a.integer(),
+    heightInches: a.integer(),
+    weightLbs: a.float(),
+    gender: a.string(),
+    bodyType: a.string(),
+    fitnessGoalType: a.string(),
+    fitnessType: a.string(),
+    workoutFrequency: a.string(),
+    preferredWorkoutTime: a.string(),
+    equipmentAvailable: a.string(),
+  }).authorization(allow => [allow.owner()]),
+
+  Tracker: a.model({
+    type: a.string(), // "cardio" or "strength"
+    workout: a.string().required(), // e.g., "Running", "Bench Press"
+    duration: a.integer(), // Only for cardio
+    sets: a.integer(), // Only for strength
+    reps: a.integer(), // Only for strength
+    calories: a.integer().required(),
+    })
+    .authorization(allow => [allow.owner()]), // Restrict access to the owner
+  
 });
 
 export type Schema = ClientSchema<typeof schema>;
