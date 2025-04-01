@@ -33,6 +33,9 @@ function App() {
           </Routes>
         </div>
       </div>
+      
+      <script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
+      <script src="https://files.bpcontent.cloud/2025/03/20/15/20250320151229-P7Y98ZXN.js"></script>
 
       
 
@@ -41,7 +44,7 @@ function App() {
         style={{
           position: "fixed",
           bottom: "20px",
-          right: "20px",
+          left: "20px",
           backgroundColor: "black",
           color: "white",
           border: "none",
@@ -56,7 +59,7 @@ function App() {
       >
         Sign Out
       </button>
-
+      
 
       
     </main>
