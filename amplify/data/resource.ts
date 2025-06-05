@@ -34,6 +34,52 @@ const schema = a.schema({
     })
     .authorization(allow => [allow.owner()]), // Restrict access to the owner
   
+  CognitoUser: a.model({
+    username: a.string().required(),
+    email: a.string(),
+    enabled: a.boolean(),
+    userStatus: a.string(),
+    userCreateDate: a.string(),
+    userLastModifiedDate: a.string(),
+    lastUpdated: a.string(),
+  }).authorization(allow => [
+    // Only admin users can access this table
+    allow.groups(['admin']),
+  ]),
+
+  UserDietPreferences: a.model({
+    userID: a.string().required(),
+    
+    // Diet Types
+    dietType: a.string(), // e.g., "vegetarian", "vegan", "paleo", "ketogenic"
+    
+    // Intolerances/Allergies (Multiple)
+    intolerances: a.string().array(), // e.g., ["dairy", "gluten", "peanut"]
+    
+    // Excluded Ingredients
+    excludedIngredients: a.string().array(), // Foods they don't like or want to avoid
+    
+    // Nutritional Targets
+    caloriesPerDay: a.integer(),
+    proteinGramsPerDay: a.integer(),
+    carbGramsPerDay: a.integer(),
+    fatGramsPerDay: a.integer(),
+    
+    // Meal Preferences
+    maxReadyTime: a.integer(), // Maximum cooking time in minutes
+    cuisinePreferences: a.string().array(), // e.g., ["italian", "mexican", "indian"]
+    
+    // Custom Flags
+    lowSodium: a.boolean(),
+    lowSugar: a.boolean(),
+    highProtein: a.boolean(),
+    
+    // Meal Count
+    mealsPerDay: a.integer(),
+    
+    // Last Updated
+    lastUpdated: a.string()
+  }).authorization(allow => [allow.owner()]),
 });
 
 export type Schema = ClientSchema<typeof schema>;

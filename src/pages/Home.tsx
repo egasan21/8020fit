@@ -5,7 +5,11 @@ import { useAuthenticator } from '@aws-amplify/ui-react';
 const Home = () => {
     const { user} = useAuthenticator();
     return(
-        <div>
+        <div style={{
+            textAlign: 'left', 
+            margin: '0',
+            padding: '20px'
+        }}>
             <h2>Welcome to {user?.signInDetails?.loginId}'s Home Page!</h2>
             <div style={bottomTextStyle}>
           🥳 <strong>Enjoy Being Healthy</strong>

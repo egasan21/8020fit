@@ -4,11 +4,16 @@ import { Authenticator } from '@aws-amplify/ui-react';
 import App from "./App.tsx";
 import "./index.css";
 import { Amplify } from "aws-amplify";
-import outputs from "../amplify_outputs.json";
+import amplifyconfig from "../amplify_outputs.json";
 import '@aws-amplify/ui-react/styles.css';
 import { BrowserRouter } from 'react-router-dom'
+import { configureAPI } from "./apiConfig";
 
-Amplify.configure(outputs);
+// Initialize Amplify
+Amplify.configure(amplifyconfig);
+
+// Configure API endpoints
+configureAPI();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   

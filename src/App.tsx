@@ -9,7 +9,9 @@ import Settings from './pages/Settings';
 import Quiz from './pages/Quiz';
 import Workout from './pages/Workout';
 import Tracker from './pages/Tracker';
-import AIchatbot from './pages/AIchatbot';
+import MealPlan from './pages/MealPlan';
+import Admin from './pages/Admin';
+
 
 const client = generateClient<Schema>();
 
@@ -29,7 +31,8 @@ function App() {
             <Route path='/Quiz' element={<Quiz />} />
             <Route path='/Workout' element={<Workout />} />
             <Route path='/Tracker' element={<Tracker />} />
-            <Route path='/AIchatbot' element={<AIchatbot />} />
+            <Route path='/mealplan' element={<MealPlan />} />
+            <Route path='/admin' element={<Admin />} />
           </Routes>
         </div>
       </div>
@@ -41,7 +44,7 @@ function App() {
         style={{
           position: "fixed",
           bottom: "20px",
-          right: "20px",
+          left: "20px",
           backgroundColor: "black",
           color: "white",
           border: "none",
